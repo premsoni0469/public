@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <title>AngularJS services Practice</title>
+</head>
+<body ng-app="converterApp" ng-controller="myController">
+    <div style="display: flex; justify-content: space-around;">
+        <h1>Decimal Converter App</h1>
+        <h3>Clock: {{currentTime}}</h3>
+    </div>
+    <div style="margin-left: 250px;">
+
+        <div>
+            <input type="number" name="number" placeholder="Enter any decimal number" ng-model="decimalInput">
+            <button ng-click="convert()">Convert</button>
+        </div>
+        <div>
+            <p>Binary: {{binary}}</p>
+            <p>Hexadecimal: {{hexadecimal}}</p>
+        </div>
+        <div>
+            Current URL: {{myUrl}}
+        </div>
+        <div>
+            {{welcome_msg}}
+        </div>
+    </div>
+        
+    <script>
+        var app = angular.module('converterApp', [])
+        app.service('hexafy', function(){
+            this.myFunc = function(x){
+                return parseInt(x).toString(16).toUpperCase()
+            }
+        })
+        app.controller('myController', function($scope, hexafy, $interval, $location, $timeout){
+            $scope.decimalInput;
+            $scope.binary='';
+            $scope.hexadecimal='';
+
+            $scope.convert = function(){
+                if($scope.binary == null){
+                    alert("Blank value can't be converted")
+                }
+                else{
+                    $scope.binary = parseInt($scope.decimalInput).toString(2)
+                    $scope.hexadecimal = hexafy.myFunc($scope.decimalInput)
+                }
+            };  
+
+            $scope.currentTime = new Date().toLocaleTimeString();
+            $interval(()=>{
+                    $scope.currentTime = new Date().toLocaleTimeString()
+                }, 
+                1000
+            );
+
+            $scope.myUrl = $location.absUrl();
+
+            $scope.welcome_msg = "Hello";
+
+            $timeout(()=>{$scope.welcome_msg = "Welcome to my website"}, 2000);
+
+        })
+    </script>
+</body>
+</html>
