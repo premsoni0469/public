@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular.min.js"></script>
+    <!-- Write own css. 
+     
+        NOTE: this is a very basic code, do modify according to the needs
+    -->
+    <title>AngularJS Result page</title>
+</head>
+<body ng-app="myApp" ng-controller="myController">
+    <table>
+        <tr>
+            <th>Sr No</th>
+            <th>Name</th>
+            <th>Grade</th>
+            <th>Marks</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>SE</td>
+            <td>A</td>
+            <td>{{se}}</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>CNS</td>
+            <td>O</td>
+            <td>{{cns}}</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>IP</td>
+            <td>A</td>
+            <td>{{ip}}</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>ADSA</td>
+            <td>O</td>
+            <td>{{adsa}}</td>
+        </tr>
+        <tr>
+            <td colspan="3">TOTAL</td>
+            <td>{{total}}</td>
+        </tr>
+    </table>
+    <div>
+        Percentage: {{percentage}}
+    </div>
+
+    <script>
+        var app = angular.module("myApp", [])
+
+        app.controller("myController", function($scope){
+            $scope.se = 80;
+            $scope.cns = 84;
+            $scope.ip = 92;
+            $scope.adsa = 94;
+
+            $scope.total = $scope.se + $scope.cns + $scope.ip + $scope.adsa
+
+            $scope.percentage = ($scope.total * 100) / 400
+        })
+    </script>
+</body>
+</html>
