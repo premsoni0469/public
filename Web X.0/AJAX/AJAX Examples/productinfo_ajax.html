@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head> 
+
+<style type="text/css">
+
+.box
+{
+border:1px solid blue;
+padding:10px
+}
+</style>
+<script>
+function getContent(url)
+{
+var xmlhttp;
+
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("contentArea").innerHTML=xmlhttp.responseText;
+    }
+  }
+
+xmlhttp.open('GET',url,true);
+xmlhttp.send();
+}
+
+function clearContent()
+{
+  document.getElementById('contentArea').innerHTML=' ';
+}
+</script>
+</head>
+<body>
+<h1>Mouse over a product for more information</h1>
+<img src="im1.jpg" onmouseover='getContent("https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState")' onmouseout='clearContent()'/>
+<img src="im2.jpg" onmouseover='getContent("im2.html")' onmouseout='clearContent()'/>
+<div class="box" id="contentArea"><br><br><br><br> </div>
+
+
+</body>
+</html>
