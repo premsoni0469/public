@@ -25,3 +25,12 @@ function clearAll(){
     equation.innerText = '0';
     answer.innerText = '0';
 }
+
+function removeDigit(){
+    if(input_equation.innerText.length > 1){
+        input_equation.innerText = input_equation.innerText.slice(0, -1);
+    }
+    else{
+        input_equation.innerText = '0';
+    }
+}
